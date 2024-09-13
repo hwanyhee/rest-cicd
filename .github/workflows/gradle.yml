@@ -46,10 +46,9 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_KEY }}
       - name: Deploy to OCI
-        run: |
-          
-          scp -o StrictHostKeyChecking=no build/libs/artifact/*.jar ubuntu@158.180.93.201:/home/ubuntu/
-          ssh -o StrictHostKeyChecking=no ubuntu@158.180.93.201 << 'EOF'          
+        run: |          
+          scp -o StrictHostKeyChecking=no build/libs/artifact/*.jar $REMOTE_USER@$REMOTE_HOST:$REMOTE_PATH
+          ssh -o StrictHostKeyChecking=no ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} << 'EOF'          
           pkill -f 'java -jar' || true 		        
-          nohup java -jar /home/ubuntu/*.jar > app.log 2>&1 &
+          nohup java -jar $REMOTE_PATH*.jar > app.log 2>&1 &
           EOF
