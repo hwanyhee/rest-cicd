@@ -68,7 +68,7 @@ jobs:
     - name: Build with Gradle Wrapper
       run: ./gradlew build
     - name: Confirm build
-      run |
+      run: |
         pwd
         ls -al
     
