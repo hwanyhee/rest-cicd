@@ -1,0 +1,36 @@
+server: #디폴트(8080)
+  port: 9090
+
+#데이타 베이스 연결을 위한 설정
+spring:
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@localhost:1521/XEPDB1
+    username: RESTAPI
+    password: RESTAPI 
+
+#Spring-Data-JPA설정
+  jpa:
+    hibernate:
+      ddl-auto: none  #ddl 자동 생성
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl #JPA 컬럼명 전략
+    properties:
+      hibernate:
+        format_sql: true  #DDL문 가독성 있게 표시
+    show-sql: true  #JPA쿼리 로그 확인용  
+#파일 업로드관련 설정
+  servlet:
+    multipart:
+      max-file-size: 2MB #파일 하나의 최대 용량
+      max-request-size: 15MB #멀티파일 업로드시 총 합계 용량
+      location: C:\\Temp\\Upload #파일  
+      
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: alpha
+    tags-sorter: alpha    
+    
+  api-docs:
+    path: /api-docs
