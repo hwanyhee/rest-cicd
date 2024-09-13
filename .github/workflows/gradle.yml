@@ -50,6 +50,6 @@ jobs:
           
           scp -o StrictHostKeyChecking=no build/libs/artifact/*.jar ubuntu@158.180.93.201:/home/ubuntu/
           ssh -o StrictHostKeyChecking=no ubuntu@158.180.93.201 << 'EOF'          
-              pkill -f 'java -jar' || true 		        
-              nohup java -jar /home/ubuntu/*.jar > app.log 2>&1 &
-            EOF
+          pkill -f 'java -jar' || true 		        
+          nohup java -jar /home/ubuntu/*.jar > app.log 2>&1 &
+          EOF
